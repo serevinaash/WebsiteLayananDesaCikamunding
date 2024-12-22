@@ -391,7 +391,28 @@
         <button id="scroll-right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 10; background: #51839C; color: white; border: none; border-radius: 50%; width: 40px; height: 40px;">&#8250;</button>
     </div>
 </div>
+<div class="weather-card">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="sunny-icon">
+                <i class="bi bi-sun-fill"></i>
+            </div>
+        </div>
+    </div>
+    <h1 class="weather-title text-center mb-4">
+        Cuaca di desa cikamunding</h1>
 
+    <div id="weatherInfo">
+        <div class="weather-icon text-center">
+            <i class="bi bi-cloud-sun"></i>
+        </div>
+        <div class="weather-info text-center">
+            <p>Suhu: {{ $weatherData['main']['temp'] }} °C</p>
+            <p>Kelembapan: {{ $weatherData['main']['humidity'] }}%</p>
+            <p>Cuaca: {{ $weatherData['weather'][0]['description'] }}</p>
+        </div>
+    </div>
+</div>
 <!-- JavaScript -->
 <script>
     const scrollContainer = document.getElementById('scroll-container');
@@ -527,7 +548,7 @@ document.getElementById('scroll-right').addEventListener('click', function() {
         @media (max-width: 768px) {
 
             .welcome-heading {
-                font-size: 30px;
+                font-size: 20px;
             }
 
             .welcome-paragraph {

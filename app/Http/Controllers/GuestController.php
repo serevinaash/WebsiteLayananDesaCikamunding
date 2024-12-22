@@ -3,28 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notifikasi;
+use App\Services\WeatherService; // Tambahkan WeatherService
 
 class GuestController extends Controller
 {
+    protected $weatherService;
+
+    public function __construct(WeatherService $weatherService)
+    {
+        $this->weatherService = $weatherService;
+    }
+
     public function wellcome()
     {
-        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)->where('status_notifikasi', Notifikasi::STATUS_UNREAD)->count() ?? 0;
+        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)
+            ->where('status_notifikasi', Notifikasi::STATUS_UNREAD)
+            ->count() ?? 0;
 
-        return view('wellcome', compact('jumlah_notifikasi'));
+        $weatherData = $this->weatherService->getWeatherByCity('Banten');
+
+        return view('wellcome', compact('jumlah_notifikasi', 'weatherData'));
     }
 
     public function informasi()
     {
-        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)->where('status_notifikasi', Notifikasi::STATUS_UNREAD)->count() ?? 0;
+        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)
+            ->where('status_notifikasi', Notifikasi::STATUS_UNREAD)
+            ->count() ?? 0;
 
-        return view('informasi', compact('jumlah_notifikasi'));
+        $weatherData = $this->weatherService->getWeatherByCity('Banten');
+
+        return view('informasi', compact('jumlah_notifikasi', 'weatherData'));
     }
-
     public function feedback()
     {
-        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)->where('status_notifikasi', Notifikasi::STATUS_UNREAD)->count() ?? 0;
+        $jumlah_notifikasi = Notifikasi::where('user_id', auth()->user()->id ?? null)
+            ->where('status_notifikasi', Notifikasi::STATUS_UNREAD)
+            ->count() ?? 0;
 
-        return view('feedback', compact('jumlah_notifikasi'));
+        $weatherData = $this->weatherService->getWeatherByCity('Banten');
+
+        return view('feedback', compact('jumlah_notifikasi', 'weatherData'));
     }
 
     public function berita()
@@ -72,11 +91,12 @@ class GuestController extends Controller
     ];
 
     foreach ($berita as &$item) {
-        $item['thumbnail'] = $item['thumbnail'] ?: 'https://via.placeholder.com/150'; // Placeholder jika tidak ada gambar
+        $item['thumbnail'] = $item['thumbnail'] ?: 'https://via.placeholder.com/150';
     }
 
+    $weatherData = $this->weatherService->getWeatherByCity('Banten');
 
-    return view('berita', compact('berita','jumlah_notifikasi'));
+    return view('berita', compact('berita', 'jumlah_notifikasi', 'weatherData'));
     }
 
 

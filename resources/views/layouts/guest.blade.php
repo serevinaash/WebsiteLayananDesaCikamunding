@@ -26,15 +26,66 @@
 
     <title>Desa Cikamunding @yield('title')</title>
 
-    <style>
-        * {
-            scroll-behavior: smooth;
+            <style>
+                * {
+                    scroll-behavior: smooth;
+                }
+
+                .border-bottom-green {
+                    border-bottom: 5px solid #51839C;
+                }
+
+        .weather-card {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+            /* To position the sun icon */
         }
 
-        .border-bottom-green {
-            border-bottom: 5px solid #51839C;
+        .weather-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
         }
-    </style>
+
+        .input-group-text {
+            background-color: #fff;
+            border: none;
+        }
+
+        .weather-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .weather-info {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .weather-btn {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .weather-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .sunny-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #ffce00;
+            font-size: 48px;
+        }
+            </style>
 
     @stack('styles')
 </head>

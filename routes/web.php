@@ -73,6 +73,17 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/pengaduan/{id}', [ServiceController::class, 'pengaduanDetail'])->name('pengaduan.detail');
     Route::post('/pengaduan', [ServiceController::class, 'pengaduanStore'])->name('pengaduan.store');
 
+     //cuaca
+     Route::get('/weather/banten', function (WeatherService $weatherService) {
+        $weatherData = $weatherService->getWeatherByCity('Banten');
+
+        if (!$weatherData) {
+            return response()->json(['error' => 'Unable to fetch weather data'], 500);
+        }
+
+        return view('weather', compact('weatherData'));
+    });
+
 });
 
 // Admin
